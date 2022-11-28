@@ -230,42 +230,42 @@ from typing import List
 # sol = Solution()
 # print(sol.sortArray(nums))
 # ======================================================================================================================
-# # 桶排序（Bucket Sort）
-# class Solution:
-#     def insertionSort(self, arr):
-#         # 遍历无序序列
-#         for i in range(1, len(arr)):
-#             temp = arr[i]
-#             j = i
-#             # 从右至左遍历有序序列
-#             while j > 0 and arr[j - 1] > temp:
-#                 # 将有序序列中插入位置右侧的元素依次右移一位
-#                 arr[j] = arr[j - 1]
-#                 j -= 1
-#             # 将该元素插入到适当位置
-#             arr[j] = temp
-#         return arr
-#     def bucketSort(self, arr, bucket_size=5):
-#         # 计算待排序序列中最大值元素 arr_max 和最小值元素 arr_min
-#         arr_min, arr_max = min(arr), max(arr)
-#         # 定义桶的个数为 (最大值元素 - 最小值元素) // 每个桶的大小 + 1
-#         bucket_count = (arr_max - arr_min) // bucket_size + 1
-#         # 定义桶数组 buckets
-#         buckets = [[] for _ in range(bucket_count)]
-#         # 遍历原始数组元素，将每个元素装入对应区间的桶中
-#         for num in arr:
-#             buckets[(num - arr_min) // bucket_size].append(num)
-#         # 对每个桶内的元素单独排序，并合并到 res 数组中
-#         res = []
-#         for bucket in buckets:
-#             self.insertionSort(bucket)
-#             res.extend(bucket)
-#         return res
-#     def sortArray(self, nums: List[int]) -> List[int]:
-#         return self.bucketSort(nums)
-# nums = [30, 49, 8, 13, 22, 15, 10, 39, 5, 44]
-# sol = Solution()
-# print(sol.sortArray(nums))
+# 桶排序（Bucket Sort）
+class Solution:
+    def insertionSort(self, arr):
+        # 遍历无序序列
+        for i in range(1, len(arr)):
+            temp = arr[i]
+            j = i
+            # 从右至左遍历有序序列
+            while j > 0 and arr[j - 1] > temp:
+                # 将有序序列中插入位置右侧的元素依次右移一位
+                arr[j] = arr[j - 1]
+                j -= 1
+            # 将该元素插入到适当位置
+            arr[j] = temp
+        return arr
+    def bucketSort(self, arr, bucket_size=5):
+        # 计算待排序序列中最大值元素 arr_max 和最小值元素 arr_min
+        arr_min, arr_max = min(arr), max(arr)
+        # 定义桶的个数为 (最大值元素 - 最小值元素) // 每个桶的大小 + 1
+        bucket_count = (arr_max - arr_min) // bucket_size + 1
+        # 定义桶数组 buckets
+        buckets = [[] for _ in range(bucket_count)]
+        # 遍历原始数组元素，将每个元素装入对应区间的桶中
+        for num in arr:
+            buckets[(num - arr_min) // bucket_size].append(num)
+        # 对每个桶内的元素单独排序，并合并到 res 数组中
+        res = []
+        for bucket in buckets:
+            self.insertionSort(bucket)
+            res.extend(bucket)
+        return res
+    def sortArray(self, nums: List[int]) -> List[int]:
+        return self.bucketSort(nums)
+nums = [30, 49, 8, 13, 22, 15, 10, 39, 5, 44]
+sol = Solution()
+print(sol.sortArray(nums))
 # ======================================================================================================================
 # # 基数排序（Radix Sort）
 # class Solution:  # 先根据个位数排序一次，再根据十位数排序一次
@@ -278,7 +278,7 @@ from typing import List
 #             buckets = [[] for _ in range(10)]    # 按照个位数取桶，按照十位数取桶
 #             # 遍历数组元素，根据元素对应位上的值，将其存入对应位的桶中
 #             for num in arr:
-#                 buckets[num // (10 ** i) % 10].append(num)
+#                 buckets[num // (10 ** i) % 10].append(num)  # size是2即只有个位和十位，先i=0即10的0次方为1，通过%取余为个位数；i=1则取十位
 #             # 清空原始数组
 #             arr.clear()
 #             # 从桶中依次取出对应元素，并重新加入到原始数组
@@ -294,22 +294,22 @@ from typing import List
 # ======================================================================================================================
 # 排序算法题目    https://algo.itcharge.cn/01.Array/02.Array-Sort/11.Array-Sort-List/
 # ======================================================================================================================
-# 剑指 Offer 45. 把数组排成最小的数
-import functools
-class Solution:
-    def minNumber(self, nums: List[int]) -> str:
-        def cmp(a, b):
-            if a + b == b + a:
-                return 0
-            elif a + b > b + a:
-                return 1
-            else:
-                return -1
-        nums_s = list(map(str, nums))  # 把nums中的每个值变成str
-        nums_s.sort(key=functools.cmp_to_key(cmp))
-        print(nums_s)
-        return ''.join(nums_s)
-nums = [3, 30, 34, 5, 9]
-sol = Solution()
-print(sol.minNumber(nums))
+# # 剑指 Offer 45. 把数组排成最小的数
+# import functools
+# class Solution:
+#     def minNumber(self, nums: List[int]) -> str:
+#         def cmp(a, b):
+#             if a + b == b + a:
+#                 return 0
+#             elif a + b > b + a:
+#                 return 1
+#             else:
+#                 return -1
+#         nums_s = list(map(str, nums))  # 把nums中的每个值变成str
+#         nums_s.sort(key=functools.cmp_to_key(cmp))
+#         print(nums_s)
+#         return ''.join(nums_s)
+# nums = [3, 30, 34, 5, 9]
+# sol = Solution()
+# print(sol.minNumber(nums))
 # ======================================================================================================================
